@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Crapps</title>
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for( 'static',filename = 'styles/style.css')}}"> -->
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap">
+
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+    
+  </head>
+  <body>
+
+    <!-- {% block body %} -->
+
+    <div class="container-fluid banner">
+      <div class = "row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-md">
+          <div class="navbar-brand">Crapps</div>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">DONATE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">MENU</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">ABOUT US</a>
+            </li>
+          </ul>
+        </nav>
+        </div>
+        <div class="col-md-6 offset-md-3 info">
+          <h1 class ="text-center">Make terrible apps</h1>
+           <p>
+             Here at Crapps we are committed to making terrible, barely functioning apps.
+             We focus on poor opptimisation, inconsistent rendering and slow performance.
+             So if you you need an app made badly, look no further and come join the ranks of our unhappy customers.
+            </p> 
+           <a href="#cunty" class="btn btn-md text-center">Order a Crapp</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="jumbotron">
+      <h1 class="display-4">Making a Crapp has never been easier! </h1>
+      <p class="lead">Simply leave your idea and we will do the rest!</p>
+      <hr class="my-4">
+      <p>All Crapps are created based on your personal preferences and ideas</p>
+      
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        Make my crapp
+      </button> 
+    </div>
+
+    
+    
+    <div class="collapse" id="collapseExample">
+      <div class="card card -body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+      </div>
+    </div>
+    
+
+    <form style = "margin: 10px 2% -10px auto; border:20px solid white;" id="cunty"> 
+      <div class="form-group" >
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Crapp name</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Would you like to be added to our email list</label>
+      </div>
+
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Your Crapp idea</span>
+        </div>
+        <textarea class="form-control" aria-label="With textarea"></textarea>
+      </div>
+
+
+      <h1></h1>
+      <button type="submit" class="btn btn-primary" >Submit</button>
+    </form>
+
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Still not sure about ordering a Crapp?</h1>
+        <p class="lead">Well here are some examples of some of our dogshit UI's that we have built over the years </p>
+      </div>
+    </div>
+   
+    <div class="shom" style="background:url('https://images.freeimages.com/images/large-previews/004/ice-cristals-1157772.jpg');">
+    <div class="row" >
+      <div class="column_pic">
+        <p style="margin-top: 80px;"></p>
+        <img src="../static/crappss.jpg" alt="Snow" style="width:100%">
+        <p class= "shit_description">Look at this dogshit</p>
+        <p style="margin-bottom: 50px;"></p>
+      </div>
+      <div class="column_pic">
+        <p style="margin-top: 80px;"></p>
+        <img src="../static/crass.jpg" alt="Forest" style="width:100%">
+        <p class= "shit_description">This is some real shit</p>
+        <p style="margin-bottom: 50px;"></p>
+      </div>
+      <div class="column_pic">
+        <p style="margin-top: 80px;"></p>
+        <img src="../static/crappy.jpg" alt="Mountains" style="width:100%">
+        <p class= "shit_description">Wow how was this even made so badly</p>
+        <p style="margin-bottom: 50px;"></p>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="jumbotron jumbotron-fluid" style="margin-top: 50px; margin-bottom: 0px;">
+      <div class="container">
+        <h1 class="display-4">Contact us</h1>
+        <p class="lead">Phone: +7 999 115 44 25</p>
+        <p class="lead">Email: makecrapps@gmail.com</p>
+      </div>
+    </div>
+
+
+    <!-- {% endblock %} -->
+
+  </body>
+</html>

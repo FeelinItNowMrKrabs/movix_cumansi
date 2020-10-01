@@ -1,0 +1,97 @@
+.body {
+    /*
+    background: url('https://images.unsplash.com/photo-1546083381-2bed38b42cac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    font-family: 'Raleway',sans-serif;
+    color: violet;*/
+    font-family: 'Raleway',sans-serif;
+  }
+.banner{
+    height:100vh;
+    width: 100%;
+    background:url('https://images.unsplash.com/photo-1546083381-2bed38b42cac?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-position:top;
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+  .trial{
+    height:vh;
+    color: aqua;
+  }
+
+.banner .navbar{
+    margin: 1.8%;
+}
+.banner .navbar-brand{
+    color: #fff;
+    font-size: 1.8em;
+    font-weight:700;
+    margin-left: 4%;
+}
+.banner .nav{
+    margin-right:10%;
+} 
+.banner .nav li a{
+    color: #aaa;
+    font-size: 1.2em;
+}
+.banner .info{
+    margin-top:10%;
+    transform: translateY(-15%);
+}
+.banner .info h1{
+    font-size: 2.5em;
+    font-weight: 700;
+    color: #fff ;
+}
+
+.banner .info p{
+    font-size: 2em;
+    font-weight: 500;
+    color: #aaa ;
+}
+
+.banner .info a{
+    margin-left:35%;
+    margin-top: 10%;
+    transform:translateY(-15%);
+    color: #fff;
+    font-size: 2em;
+    font-weight: 600;
+    padding: 10px 20px;
+    background: blue;
+}
+.banner .info a:hover{
+    background: #e91e63;
+}
+
+.input-group input-group-lg{
+    margin: 10;
+}
+
+.media {
+    text-align: center;
+    display: block;
+  }
+
+.column_pic{
+    
+    margin: auto;
+    align-content: center;
+}
+
+.shit_description{
+
+    margin: auto;
+    text-align: center;
+}
+
+
+
+/* https://source.unsplash.com/twukN12EN7c/1920x1080 
+https://i.kym-cdn.com/entries/icons/original/000/016/546/hidethepainharold.jpg
+*/
