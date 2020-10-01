@@ -1,21 +1,6 @@
 from flask import Flask, request, render_template, url_for
 
-
-from clickhouse_pool import ChPool
-
-
-
 app = Flask(__name__)
-
-pool = ChPool()
-
-with pool.get_client() as client:
-    # execute sql and print the result
-    result = client.execute("SELECT * FROM system.numbers LIMIT 5")
-    print(result)
-
-# always close all connections in the pool once you're done with it
-pool.cleanup()
 
 @app.route('/', methods= ['GET','POST'])
 def login():
