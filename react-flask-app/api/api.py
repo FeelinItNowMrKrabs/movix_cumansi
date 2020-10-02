@@ -29,7 +29,7 @@ def boevik():
     for i in genres:
         data = client.execute(f"""SELECT assetid, arrayElement(groupArray(title), 1), count() as cnt FROM events WHERE has(splitByChar(',', genretitles), '{i}') = 1 and (eventtype = 31 or eventtype = 15) GROUP BY assetid ORDER BY cnt DESC LIMIT 5""")
         settt[i] = data
-    return {'Fuckin all': settt}
+    return {'fuckinAll': settt}
 
 
 @app.route('/similar/<int:id>')
@@ -39,15 +39,19 @@ def similar(id):
     
     data = client.execute(f"""SELECT similar_assetids FROM similarfilms WHERE assetid = {id}""")[0][0]
     
-    splitted = data.split(',')[:5]
+    splitted = data.split(',')
 
     for i in splitted:
         hold_bitch = client.execute(f"""select assetid, arrayElement(groupArray(title), 1) from events where assetid = {i} group by assetid""")
-        if hold_bitch  != "":
+        try:
             tit_id = hold_bitch[0]
-            settt.append(tit_id)
+        except IndexError:
+            continue
+        settt.append(tit_id)
+        if len(settt) == 5:
+            break
 
-    return  {'Fuckinall':settt}
+    return  {'Fuckinall': settt}
 
 
 @app.route('/create/<int:id>+<int:views>')

@@ -10,14 +10,16 @@ const Container = styled.div`
     align-content: space-between;
 `
 const MainContainer = styled.div`
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     align-content: space-between;
     flex-direction: column;
+    border-bottom: solid;
+    margin: 0 15px;
 `
-const Title = styled.p`
-
+const Title = styled.h2`
+        text-align: center;
 `
 
 export default function Showcase(props) {
@@ -28,11 +30,12 @@ export default function Showcase(props) {
     const [boeviks, setBoeviks] = useState([])
 
     useEffect(() => {
-        const newData = props.data
+
+        const newData = props.allMovies || []
         setTitle(props.title)
         let movieContainerArr = []
         for (let i = 0; i < newData.length; i++) {
-            movieContainerArr.push(<MovieContainer text={newData[i][2]} key={i} callNewMovies={callNewMovies} />);
+            movieContainerArr.push(<MovieContainer movieId={newData[i][0]} text={newData[i][1]} key={newData[i][0]} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
@@ -50,12 +53,15 @@ export default function Showcase(props) {
             )
         })
         setMainObj(mainArr)
-    }, [props.data])
+    }, [props.data, props.allMovies])
 
-    const callNewMovies = (movieId) => {
+    const callNewMovies = async (id) => {
+        const res = await fetch(`http://localhost:5000/similar/${id}`)
+        const data = await res.json()
+        const all = data.Fuckinall
         let movieContainerArr = []
-        for (let i = 0; i < 5; i++) {
-            movieContainerArr.push(<MovieContainer key={i + 'movie'} callNewMovies={callNewMovies} />);
+        for (let i = 0; i < all.length; i++) {
+            movieContainerArr.push(<MovieContainer movieId={all[i][0]} text={all[i][1]} key={i + 'movie'} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
@@ -66,15 +72,25 @@ export default function Showcase(props) {
             containers.map(elem => {
                 tmpArr.push(elem)
             })
-            mainArr.push(
-                <Container >
-                    {tmpArr}
-                </Container >
-            )
+            if (mainArr.length == 1) {
+                mainArr.push(
+                    <Container >
+                        {tmpArr}
+                        <div>Вам может понравится</div>
+                    </Container >
+                )
+            }
+            else {
+                mainArr.push(
+                    <Container >
+                        {tmpArr}
+                    </Container >
+                )
+            }
         })
-        if(mainArr.length < 6) setMainObj(mainArr)
+        if (mainArr.length < 6) setMainObj(mainArr)
     }
-
+    console.log(props)
     return (
         <React.Fragment>
             <Title > {title} </Title>
