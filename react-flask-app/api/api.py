@@ -25,12 +25,29 @@ def top25():
 def boevik():
     client = Client('127.0.0.1')
     settt = {}
-    genres = ['Боевики', 'Вестерны', "Детекстивы", "Для детей", 'Комедии', "Мелодрамы", "Мультфильмы", "Приключения", "Спорт", "Триллер", "Ужасы", "Фантастика"]
+    genres = ['Боевики', 'Вестерны', "Детективы", "Для детей", 'Комедии', "Мелодрамы", "Мультфильмы", "Приключения", "Спорт", "Триллеры", "Ужасы", "Фантастика"]
     for i in genres:
         data = client.execute(f"""SELECT assetid, arrayElement(groupArray(title), 1), count() as cnt FROM events WHERE has(splitByChar(',', genretitles), '{i}') = 1 and (eventtype = 31 or eventtype = 15) GROUP BY assetid ORDER BY cnt DESC LIMIT 5""")
         settt[i] = data
     return {'Fuckin all': settt}
 
+
+@app.route('/similar/<int:id>')
+def similar(id):
+    client = Client('127.0.0.1')
+    settt = []
+    
+    data = client.execute(f"""SELECT similar_assetids FROM similarfilms WHERE assetid = {id}""")[0][0]
+    
+    splitted = data.split(',')[:5]
+
+    for i in splitted:
+        hold_bitch = client.execute(f"""select assetid, arrayElement(groupArray(title), 1) from events where assetid = {i} group by assetid""")
+        if hold_bitch  != "":
+            tit_id = hold_bitch[0]
+            settt.append(tit_id)
+
+    return  {'Fuckinall':settt}
 
 
 @app.route('/create/<int:id>+<int:views>')
