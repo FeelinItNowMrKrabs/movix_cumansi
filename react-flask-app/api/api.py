@@ -25,7 +25,7 @@ def top25():
 def boevik():
     client = Client('127.0.0.1')
     settt = {}
-    genres = ['Боевики', 'Вестерны', "Детекстивы", "Для детей", 'Комедии', "Мелодрамы", "Мультфильмы", "Приключения", "Спорт", "Триллер", "Ужасы", "Фантастика"]
+    genres = ['Боевики', 'Вестерны', "Детективы", "Для детей", 'Комедии', "Мелодрамы", "Мультфильмы", "Приключения", "Спорт", "Триллеры", "Ужасы", "Фантастика"]
     for i in genres:
         data = client.execute(f"""SELECT assetid, arrayElement(groupArray(title), 1), count() as cnt FROM events WHERE has(splitByChar(',', genretitles), '{i}') = 1 and (eventtype = 31 or eventtype = 15) GROUP BY assetid ORDER BY cnt DESC LIMIT 5""")
         settt[i] = data
