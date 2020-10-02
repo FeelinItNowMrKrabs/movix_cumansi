@@ -1,6 +1,6 @@
 import time
 from flask import Flask
-from models.database import DataBasa
+from models.movies import Movies
 from markupsafe import escape
 
 
@@ -15,7 +15,7 @@ def get_cur_time():
 @app.route('/create/<int:id>+<int:views>')
 def create(id,views):
     db = DataBasa()
-    db.add_shit(views,id)
+    db.add_shit(id,views)
     return {'time': time.time()}
 
 @app.route('/request/<int:id>')
@@ -32,3 +32,14 @@ def request(id):
          message = "Красава"
 
     return {'Ты: ': message}
+
+@app.route('/add_like/<int:movie_id>')
+def create_add_like(movie_id):
+    return {'time': time.time()}
+
+@app.route('/get_movie/<int:id>')
+def get_movie(id):
+    db = Movies()
+    movi = db.get_by_id(id)
+    
+    return movi
