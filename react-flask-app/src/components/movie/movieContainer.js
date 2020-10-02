@@ -17,7 +17,7 @@ export default function MovieContainer(props) {
     const [movieId, setMovieId] = useState(0);
     //const { imgUrl, text } = props
     return (
-        <Container onClick={()=>{props.requestLinkMovies(movieId)}}>
+        <Container onClick={()=>{props.callNewMovies()}}>
             <MovieFrame imgUrl={imgUrl} />
             <MovieText text={text} />
         </Container >
