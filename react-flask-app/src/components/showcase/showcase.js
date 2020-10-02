@@ -20,6 +20,7 @@ async function requestLinkMovies(movieId){
 }
 
 export default function Showcase(props) {
+
     const { title } = props
     let movieContainerArr = []
     for (let i = 0; i < 5; i++) {

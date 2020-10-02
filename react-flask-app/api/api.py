@@ -2,10 +2,10 @@ import time
 from flask import Flask
 from models.movies import Movies
 from markupsafe import escape
-
+from flask_cors import CORS
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/test')
 def get_cur_time():
@@ -41,5 +41,5 @@ def create_add_like(movie_id):
 def get_movie(id):
     db = Movies()
     movi = db.get_by_id(id)
-    
-    return movi
+
+    return {'time': movi}
