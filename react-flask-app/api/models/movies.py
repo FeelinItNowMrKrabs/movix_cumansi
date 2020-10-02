@@ -44,6 +44,13 @@ class Movies:
 
         return title
 
+    def get_first_five(self):
+
+        self.cursor.execute(f"SELECT assetid,event_count,title FROM {MOVIES_TABLE} LIMIT 5")
+
+        result = self.cursor.fetchall()
+        return result
+
  
     def fill_db(self):
         with open('/Volumes/MacOS — данные/Users/mac/Pictures/movix_cumansi/movix_cumansi/react-flask-app/api/models/boeviki.csv','r') as fin: 
@@ -55,3 +62,6 @@ class Movies:
         self.cursor.executemany(query, to_db)
         self.conn.commit()
 
+db = Movies()
+
+print(db.get_first_five())

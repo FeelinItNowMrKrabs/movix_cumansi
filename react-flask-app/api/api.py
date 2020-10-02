@@ -43,3 +43,11 @@ def get_movie(id):
     movi = db.get_by_id(id)
 
     return {'time': movi}
+
+@app.route('/get_boeviks')
+def get_boevik():
+    db = Movies()
+
+    boeviks = db.get_first_five()
+
+    return {'Ты: ': boeviks}
