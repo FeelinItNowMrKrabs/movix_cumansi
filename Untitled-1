@@ -1,0 +1,1 @@
+CREATE TABLE events (subscriberid UInt64, deviceid UInt64, itemtype UInt64, assetidi UInt64,platformid UInt64, extidcity String,ts UInt64,progressvalue Float64,assetposition Float64) ENGINE = MergeTree() ORDER BY ts

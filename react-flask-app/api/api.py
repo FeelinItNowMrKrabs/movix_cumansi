@@ -3,13 +3,16 @@ from flask import Flask
 from models.movies import Movies
 from markupsafe import escape
 from flask_cors import CORS
+from clickhouse_driver.client import Client
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/test')
 def get_cur_time():
-    return {'time': time.time()}
+    client = Client('127.0.0.1')
+    data = client.execute('select 1')
+    return {'databasa': data}
 
 
 @app.route('/create/<int:id>+<int:views>')
@@ -50,4 +53,4 @@ def get_boevik():
 
     boeviks = db.get_first_five()
 
-    return {'Ты: ': boeviks}
+    return {'boeviks': boeviks}

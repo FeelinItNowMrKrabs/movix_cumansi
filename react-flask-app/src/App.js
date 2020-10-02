@@ -10,12 +10,9 @@ function App() {
                 setCurrentTime(data.time)
             })
     }, [])
-    return ( <
-        div className = "App" >
-        <
-        Main / >
-        <
-        /div>
+    return (<div className="App" >
+        <Main />
+    </div>
     );
 }
 
