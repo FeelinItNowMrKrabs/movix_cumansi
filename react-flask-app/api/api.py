@@ -1,5 +1,5 @@
 import time
-from flask import Flask
+from flask import Flask,  request, jsonify
 from models.movies import Movies
 from markupsafe import escape
 from flask_cors import CORS
@@ -93,3 +93,9 @@ def get_boevik():
     boeviks = db.get_first_five()
 
     return {'boeviks': boeviks}
+
+@app.route('/send_likes', methods=['GET', 'POST'])
+def add_message():
+    content = request.json
+    
+    return jsonify({"uuid":"poluchil"})
