@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import MovieFrame from './movieFrame'
 import MovieText from './movieText'
 
-const Container = styled.div `
+const Container = styled.div`
     width: 300px;
     height: 300px;
     display: flex;
@@ -13,13 +13,10 @@ const Container = styled.div `
 
 export default function MovieContainer(props) {
     const { imgUrl, text } = props
-    return ( <
-        Container >
-        <
-        MovieFrame imgUrl = { imgUrl }
-        />  <
-        MovieText text = { text }
-        />  <
-        /Container >
+    return (
+        <Container >
+            <MovieFrame imgUrl={imgUrl} />
+            <MovieText text={text} />
+        </Container >
     );
 }
