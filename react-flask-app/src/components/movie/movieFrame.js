@@ -6,12 +6,12 @@ const StyledButton = styled(Button)
     `
     width: 150px;
     height: 150px;
-    background-image: url("https://vk.vkfaces.com/858228/v858228285/ca238/YvsZhIEkU_8.jpg");
+    background-image: url(${props => (props.imgUrl)});
+    
 `
 
-export default function MovieFrame() {
-
+export default function MovieFrame(props) {
     return (
-        <StyledButton danger outline />
+        <StyledButton imgUrl={props.imgUrl} danger outline />
     );
 }

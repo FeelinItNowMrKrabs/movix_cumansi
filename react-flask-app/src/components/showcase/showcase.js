@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
+import MovieContainer from "../movie/movieContainer";
 
 
 const Container = styled.div`
@@ -12,10 +13,23 @@ const Title = styled.p`
 
 `
 
+function requestLinkMovies(movieId){
+    console.log("movie id: ", movieId)
+}
+
 export default function Showcase(props) {
     const { title } = props
-    return (<Container >
-        <Title > {title} </Title>
-    </Container >
+    let movieContainerArr = []
+    for (let i = 0; i < 5; i++) {
+        movieContainerArr.push(<MovieContainer requestLinkMovies={requestLinkMovies}/>);
+    }
+    
+    return (
+        <React.Fragment>
+            <Title > {title} </Title>
+            <Container >
+                {movieContainerArr}
+            </Container >
+        </React.Fragment>
     );
 }
