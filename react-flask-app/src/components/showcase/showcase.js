@@ -13,8 +13,10 @@ const Title = styled.p`
 
 `
 
-function requestLinkMovies(movieId){
-    console.log("movie id: ", movieId)
+async function requestLinkMovies(movieId){
+    const res = await fetch(`http://localhost:5000/get_movie/171699`)
+    const data = res.json()
+    console.log("movie id: ", data)
 }
 
 export default function Showcase(props) {
