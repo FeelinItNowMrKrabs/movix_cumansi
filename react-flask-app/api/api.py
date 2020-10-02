@@ -15,6 +15,12 @@ def get_cur_time():
     return {'databasa': data}
 
 
+@app.route('/top25')
+def top25():
+    client = Client('127.0.0.1')
+    data = client.execute('SELECT assetid, count() AS cnt_watch FROM events WHERE eventtype = 31 GROUP BY assetid ORDER BY cnt_watch DESC LIMIT 25')
+    return {'top25': data}
+
 @app.route('/create/<int:id>+<int:views>')
 def create(id,views):
     db = DataBasa()
