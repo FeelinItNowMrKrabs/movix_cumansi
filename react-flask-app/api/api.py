@@ -32,6 +32,23 @@ def boevik():
     return {'fuckinAll': settt}
 
 
+@app.route('/similar/<int:id>')
+def similar(id):
+    client = Client('127.0.0.1')
+    settt = []
+    
+    data = client.execute(f"""SELECT similar_assetids FROM similarfilms WHERE assetid = {id}""")[0][0]
+    
+    splitted = data.split(',')[:5]
+
+    for i in splitted:
+        hold_bitch = client.execute(f"""select assetid, arrayElement(groupArray(title), 1) from events where assetid = {i} group by assetid""")
+        if hold_bitch  != "":
+            tit_id = hold_bitch[0]
+            settt.append(tit_id)
+
+    return  {'Fuckinall':settt}
+
 
 @app.route('/create/<int:id>+<int:views>')
 def create(id,views):
