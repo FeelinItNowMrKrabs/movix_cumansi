@@ -10,11 +10,13 @@ const Container = styled.div`
     align-content: space-between;
 `
 const MainContainer = styled.div`
-    width: 100%;
+    width: auto;
     height: auto;
     display: flex;
     align-content: space-between;
     flex-direction: column;
+    border-bottom: solid;
+    margin: 0 15px;
 `
 const Title = styled.h2`
         text-align: center;
