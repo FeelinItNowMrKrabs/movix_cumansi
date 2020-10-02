@@ -21,6 +21,27 @@ const MainContainer = styled.div`
 const Title = styled.h2`
         text-align: center;
 `
+const Text = styled.h4`
+        text-align: center;
+`
+
+async function userChoise(arr, userId){
+    let user = {
+        movies: arr,
+        userId: userId
+      };
+      
+      let response = await fetch('http://localhost:5000/send_likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(user)
+      });
+      
+      let result = await response.json();
+      alert(result.message);
+}
 
 export default function Showcase(props) {
 
@@ -30,7 +51,7 @@ export default function Showcase(props) {
     const [boeviks, setBoeviks] = useState([])
 
     useEffect(() => {
-
+        userChoise([123,456,555], 12345)
         const newData = props.allMovies || []
         setTitle(props.title)
         let movieContainerArr = []
@@ -72,12 +93,14 @@ export default function Showcase(props) {
             containers.map(elem => {
                 tmpArr.push(elem)
             })
-            if (mainArr.length == 1) {
+            if (mainArr.length == 2) {
                 mainArr.push(
-                    <Container >
-                        {tmpArr}
-                        <div>Вам может понравится</div>
-                    </Container >
+                    <React.Fragment>
+                        <Text>Вам может понравиться</Text>
+                        <Container >
+                            {tmpArr}
+                        </Container >
+                    </React.Fragment>
                 )
             }
             else {
