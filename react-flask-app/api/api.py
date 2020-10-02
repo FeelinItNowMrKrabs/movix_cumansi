@@ -21,6 +21,18 @@ def top25():
     data = client.execute('SELECT assetid, count() AS cnt_watch FROM events WHERE eventtype = 31 GROUP BY assetid ORDER BY cnt_watch DESC LIMIT 25')
     return {'top25': data}
 
+@app.route('/boevik')
+def boevik():
+    client = Client('127.0.0.1')
+    settt = {}
+    genres = ['Боевики', 'Вестерны', "Детекстивы", "Для детей", 'Комедии', "Мелодрамы", "Мультфильмы", "Приключения", "Спорт", "Триллер", "Ужасы", "Фантастика"]
+    for i in genres:
+        data = client.execute(f"""SELECT assetid, arrayElement(groupArray(title), 1), count() as cnt FROM events WHERE has(splitByChar(',', genretitles), '{i}') = 1 and (eventtype = 31 or eventtype = 15) GROUP BY assetid ORDER BY cnt DESC LIMIT 5""")
+        settt[i] = data
+    return {'Fuckin all': settt}
+
+
+
 @app.route('/create/<int:id>+<int:views>')
 def create(id,views):
     db = DataBasa()
