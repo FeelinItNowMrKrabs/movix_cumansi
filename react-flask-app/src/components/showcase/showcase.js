@@ -30,11 +30,12 @@ export default function Showcase(props) {
     const [boeviks, setBoeviks] = useState([])
 
     useEffect(() => {
-        const newData = props.data
+        console.log(props.allMovies)
+        const newData = props.allMovies || []
         setTitle(props.title)
         let movieContainerArr = []
         for (let i = 0; i < newData.length; i++) {
-            movieContainerArr.push(<MovieContainer text={newData[i][2]} key={i} callNewMovies={callNewMovies} />);
+            movieContainerArr.push(<MovieContainer movieId={newData[i][0]} text={newData[i][1]} key={newData[i][0]} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
@@ -52,9 +53,11 @@ export default function Showcase(props) {
             )
         })
         setMainObj(mainArr)
-    }, [props.data])
+    }, [props.data, props.allMovies])
 
-    const callNewMovies = (movieId) => {
+    const callNewMovies = async () => {
+        const res = await fetch(`http://localhost:5000/similar/${props.movieId}`)
+        const data = res.json()
         let movieContainerArr = []
         for (let i = 0; i < 5; i++) {
             movieContainerArr.push(<MovieContainer key={i + 'movie'} callNewMovies={callNewMovies} />);

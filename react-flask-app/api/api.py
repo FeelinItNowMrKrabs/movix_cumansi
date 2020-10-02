@@ -29,7 +29,7 @@ def boevik():
     for i in genres:
         data = client.execute(f"""SELECT assetid, arrayElement(groupArray(title), 1), count() as cnt FROM events WHERE has(splitByChar(',', genretitles), '{i}') = 1 and (eventtype = 31 or eventtype = 15) GROUP BY assetid ORDER BY cnt DESC LIMIT 5""")
         settt[i] = data
-    return {'Fuckin all': settt}
+    return {'fuckinAll': settt}
 
 
 
