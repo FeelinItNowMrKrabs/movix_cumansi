@@ -20,29 +20,23 @@ const Title = styled.p`
 
 `
 
-async function requestLinkMovies(movieId) {
-    const res = await fetch(`http://localhost:5000/get_movie/171699`)
-    const data = res.json()
-    console.log("movie id: ", data)
-}
-
 export default function Showcase(props) {
 
     const [movieContainersArr, setMovieContainersArr] = useState([]);
     const [title, setTitle] = useState('');
     const [mainObj, setMainObj] = useState([])
+    const [boeviks, setBoeviks] = useState([])
 
     useEffect(() => {
+        const newData = props.data
         setTitle(props.title)
         let movieContainerArr = []
-        for (let i = 0; i < 5; i++) {
-            movieContainerArr.push(<MovieContainer key={i} callNewMovies={callNewMovies} requestLinkMovies={requestLinkMovies} />);
+        for (let i = 0; i < newData.length; i++) {
+            movieContainerArr.push(<MovieContainer text={newData[i][2]} key={i} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
         setMovieContainersArr(tempArr)
-        /*console.log(movieContainersArr)*/
-
         let mainArr = []
         tempArr.map(containers => {
             let tmpArr = []
@@ -56,18 +50,13 @@ export default function Showcase(props) {
             )
         })
         setMainObj(mainArr)
-
-    }, [])
+    }, [props.data])
 
     const callNewMovies = (movieId) => {
-        
-        console.log("click")
-        //request new movies with id
         let movieContainerArr = []
         for (let i = 0; i < 5; i++) {
-            movieContainerArr.push(<MovieContainer key={i+'a'} callNewMovies={callNewMovies} requestLinkMovies={requestLinkMovies} />);
+            movieContainerArr.push(<MovieContainer key={i + 'movie'} callNewMovies={callNewMovies} />);
         }
-        console.log('arr:', movieContainersArr)
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
         setMovieContainersArr(tempArr)
@@ -83,7 +72,7 @@ export default function Showcase(props) {
                 </Container >
             )
         })
-        setMainObj(mainArr)
+        if(mainArr.length < 6) setMainObj(mainArr)
     }
 
     return (

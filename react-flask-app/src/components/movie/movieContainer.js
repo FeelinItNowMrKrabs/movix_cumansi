@@ -19,7 +19,7 @@ export default function MovieContainer(props) {
     return (
         <Container onClick={()=>{props.callNewMovies()}}>
             <MovieFrame imgUrl={imgUrl} />
-            <MovieText text={text} />
+            <MovieText text={props.text} />
         </Container >
     );
 }
