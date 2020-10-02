@@ -94,8 +94,14 @@ def get_boevik():
 
     return {'boeviks': boeviks}
 
+
+
 @app.route('/send_likes', methods=['GET', 'POST'])
 def add_message():
     content = request.json
-    
+    we_got = request
     return jsonify({"uuid":"poluchil"})
+
+@app.route('/check')
+def check():
+    return {'checked': we_got}
