@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 const StyledButton = styled(Button)
     `
-    width: 150px;
-    height: 150px;
+    width: 13vw;
+    height: 13vh;
     background-image: url(${props => (props.imgUrl)});
     
 `

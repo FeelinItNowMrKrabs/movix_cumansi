@@ -5,7 +5,7 @@ import MovieText from './movieText'
 
 const Container = styled.div`
     width: 300px;
-    height: 300px;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;

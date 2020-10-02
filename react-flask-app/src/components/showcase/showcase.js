@@ -16,8 +16,8 @@ const MainContainer = styled.div`
     align-content: space-between;
     flex-direction: column;
 `
-const Title = styled.p`
-
+const Title = styled.h2`
+        text-align: center;
 `
 
 export default function Showcase(props) {
