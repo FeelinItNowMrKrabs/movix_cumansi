@@ -9,12 +9,13 @@ const StyledButton = styled.button`
     box-shadow: ${props=>(props.clickCheck) ? "0 0 0 0.2rem rgb(255 0 0)" : "none" };
     border: 1px solid transparent;
     border-radius: .25rem;
+    cursor: pointer;
 `
 
 
 export default function MovieFrame(props) {
     const [click, setClick] = useState(false)
     return (
-        <StyledButton clickCheck={click} imgUrl={props.imgUrl} danger outline onClick={()=>{setClick(!click)}}/>
+        <StyledButton clickCheck={click} imgUrl={props.imgUrl} danger outline onClick={()=>{setClick(true)}}/>
     );
 }

@@ -39,15 +39,19 @@ def similar(id):
     
     data = client.execute(f"""SELECT similar_assetids FROM similarfilms WHERE assetid = {id}""")[0][0]
     
-    splitted = data.split(',')[:5]
+    splitted = data.split(',')
 
     for i in splitted:
         hold_bitch = client.execute(f"""select assetid, arrayElement(groupArray(title), 1) from events where assetid = {i} group by assetid""")
-        if hold_bitch  != "":
+        try:
             tit_id = hold_bitch[0]
-            settt.append(tit_id)
+        except IndexError:
+            continue
+        settt.append(tit_id)
+        if len(settt) == 5:
+            break
 
-    return  {'Fuckinall':settt}
+    return  {'Fuckinall': settt}
 
 
 @app.route('/create/<int:id>+<int:views>')
