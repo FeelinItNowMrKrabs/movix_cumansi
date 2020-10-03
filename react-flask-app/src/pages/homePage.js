@@ -51,14 +51,13 @@ const Spinner = () => {
     )
 }
 
-async function userChoise(arr, userId){
+async function userChoise(arr, userId) {
     const res = await fetch(`http://localhost:5000/send_likes/${arr}`)
     const data = await res.json()
-    console.log(data)
-    return "da, vse ok"
+    return data;
 }
 
-export default function Main(props) {
+export default function HomePage(props) {
 
     const [boeviks, setBoeviks] = useState([])
     const [info, setInfo] = useState([])
@@ -75,27 +74,23 @@ export default function Main(props) {
     useEffect(() => {
         let tmp = genres.map((elem) => {
             const data = allMovies[elem]
-            return (<Showcase key={elem}  userId={props.match.params.id} allMovies={data} giveInfo={(movieId)=>{
+            return (<Showcase key={elem} userId={props.match.params.id} allMovies={data} giveInfo={(movieId) => {
                 let arr = sessionStorage.getItem('arr') || ''
-                arr.length==0 ? arr = arr + movieId.toString() : arr = arr +','+ movieId.toString()
+                arr.length == 0 ? arr = arr + movieId.toString() : arr = arr + ',' + movieId.toString()
                 sessionStorage.setItem('arr', arr)
-            }} 
+            }}
                 data={boeviks} title={elem} />)
         })
         setshowcaseArr(tmp)
     }, [allMovies])
-    
+
     return (
         <Conteiner >
             <Header />
             {allMovies.length == 0 ?
                 <Spinner /> :
                 <React.Fragment>
-                    <StyledButtonSuc success onClick={()=>{
-                        let arr = sessionStorage.getItem('arr') || []
-                        if(arr!=[]) setRecomendations(userChoise(arr,props.match.params.id))
-                        sessionStorage.removeItem('arr')
-                        }}>Access</StyledButtonSuc>
+                    <StyledButtonSuc success onClick={() => { window.location.assign(`http://localhost:3000/user/${props.match.params.id}`) }}>Access</StyledButtonSuc>
                     <StyledButtonWar warning onClick={() => { window.location.assign('http://localhost:3000/general'); }}>Skip questionnaire</StyledButtonWar>
                     <Form>
                         {showcaseArr}

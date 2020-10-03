@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components'
-import MovieContainer from "../components/movie/movieContainer";
+import MovieContainer from "../components/movie/staticMovieContainer";
 
 const Conteiner = styled.div`
     display: block;
@@ -34,7 +34,7 @@ export default function GeneralPage(props) {
                 let tmp = []
                 data.top25.map((elem) => {
                     tmp.push(
-                        <MovieContainer text={elem[0]} callNewMovies={() => { }} />
+                        <MovieContainer text={elem[1]} callNewMovies={() => { }} />
 
                     )
                 })

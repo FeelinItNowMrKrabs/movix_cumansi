@@ -5,6 +5,7 @@ from markupsafe import escape
 from flask_cors import CORS
 from clickhouse_driver.client import Client
 import json
+from models.database import DataBasa
 
 app = Flask(__name__)
 CORS(app)
@@ -19,7 +20,7 @@ def get_cur_time():
 @app.route('/top25')
 def top25():
     client = Client('127.0.0.1')
-    data = client.execute('SELECT assetid, count() AS cnt_watch FROM events WHERE eventtype = 31 GROUP BY assetid ORDER BY cnt_watch DESC LIMIT 25')
+    data = client.execute('SELECT assetid, arrayElement(groupArray(title), 1) as title, count() AS cnt_watch FROM events WHERE eventtype = 31 GROUP BY assetid ORDER BY cnt_watch DESC LIMIT 25')
     return {'top25': data}
 
 @app.route('/boevik')
@@ -65,16 +66,18 @@ def create(id,views):
 def request(id):
     db = DataBasa()
     res = db.get_by_id(id)
+    if(isinstance(res,type(None))):
+        db.add_shit(id,0)
+        res =0
     message = ""
-
     if(res==0):
-        message = "Новый клиент <3"
+        message = 0
     elif(res<25):
-         message = "Делай оспрос сука"
+         message = 1
     else:
-         message = "Красава"
+         message = 2
 
-    return {'Ты: ': message}
+    return {'res': message}
 
 @app.route('/add_like/<int:movie_id>')
 def create_add_like(movie_id):
