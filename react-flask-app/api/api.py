@@ -1,9 +1,10 @@
 import time
-from flask import Flask,  request, jsonify
+from flask import Flask, jsonify, request
 from models.movies import Movies
 from markupsafe import escape
 from flask_cors import CORS
 from clickhouse_driver.client import Client
+import json
 
 app = Flask(__name__)
 CORS(app)
@@ -94,14 +95,12 @@ def get_boevik():
 
     return {'boeviks': boeviks}
 
-
-
-@app.route('/send_likes', methods=['GET', 'POST'])
-def add_message():
-    content = request.json
-    we_got = request
-    return jsonify({"uuid":"poluchil"})
+@app.route('/send_likes/<int:id>/<string:likes>')
+def add_message(id,likes):
+    my_id = id
+    list_likes = likes.split('_')
+    return {my_id:list_likes}
 
 @app.route('/check')
 def check():
-    return {'checked': we_got}
+    return str(temp_huli)

@@ -22,6 +22,7 @@ export default function MovieContainer(props) {
             if (!checkClick) {
                 setCheckClick(true)
                 props.callNewMovies(props.movieId)
+                props.addMovie(props.movieId)
             }
         }}>
             <MovieFrame imgUrl={imgUrl} />

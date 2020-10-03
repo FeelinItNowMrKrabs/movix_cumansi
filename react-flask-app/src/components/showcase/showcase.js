@@ -25,38 +25,20 @@ const Text = styled.h4`
         text-align: center;
 `
 
-async function userChoise(arr, userId){
-    let user = {
-        movies: arr,
-        userId: userId
-      };
-      
-      let response = await fetch('http://localhost:5000/send_likes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(user)
-      });
-      
-      let result = await response.json();
-      alert(result.message);
-}
 
 export default function Showcase(props) {
 
     const [movieContainersArr, setMovieContainersArr] = useState([]);
     const [title, setTitle] = useState('');
     const [mainObj, setMainObj] = useState([])
-    const [boeviks, setBoeviks] = useState([])
+    const [movieArr, setMovieArr] = useState([])
 
     useEffect(() => {
-        userChoise([123,456,555], 12345)
         const newData = props.allMovies || []
         setTitle(props.title)
         let movieContainerArr = []
         for (let i = 0; i < newData.length; i++) {
-            movieContainerArr.push(<MovieContainer movieId={newData[i][0]} text={newData[i][1]} key={newData[i][0]} callNewMovies={callNewMovies} />);
+            movieContainerArr.push(<MovieContainer addMovie={addMovie} movieId={newData[i][0]} text={newData[i][1]} key={newData[i][0]} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)
@@ -76,13 +58,21 @@ export default function Showcase(props) {
         setMainObj(mainArr)
     }, [props.data, props.allMovies])
 
+    const addMovie = (movieId)=>{
+        let tmp = movieArr
+        tmp.push(movieId)
+        setMovieArr(tmp)
+        props.giveInfo(movieId)
+        console.log("movieArr: ", props)
+    }
+
     const callNewMovies = async (id) => {
         const res = await fetch(`http://localhost:5000/similar/${id}`)
         const data = await res.json()
         const all = data.Fuckinall
         let movieContainerArr = []
         for (let i = 0; i < all.length; i++) {
-            movieContainerArr.push(<MovieContainer movieId={all[i][0]} text={all[i][1]} key={i + 'movie'} callNewMovies={callNewMovies} />);
+            movieContainerArr.push(<MovieContainer addMovie={addMovie} movieId={all[i][0]} text={all[i][1]} key={i + 'movie'} callNewMovies={callNewMovies} />);
         }
         let tempArr = movieContainersArr;
         tempArr.push(movieContainerArr)

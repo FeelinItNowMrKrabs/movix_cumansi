@@ -51,12 +51,20 @@ const Spinner = () => {
     )
 }
 
+async function userChoise(arr, userId){
+    const res = await fetch(`http://localhost:5000/send_likes/${userId.toString()}/${arr}`)
+    const data = await res.json()
+    console.log(data)
+    return "da, vse ok"
+}
+
 export default function Main(props) {
 
     const [boeviks, setBoeviks] = useState([])
-    const [topMovies, setTopMovies] = useState([])
+    const [info, setInfo] = useState([])
     const [allMovies, setallMovies] = useState([])
     const [showcaseArr, setshowcaseArr] = useState([])
+    const [recomendations, setRecomendations] = useState([])
 
     useEffect(() => {
         fetch('http://localhost:5000/boevik')
@@ -67,19 +75,27 @@ export default function Main(props) {
     useEffect(() => {
         let tmp = genres.map((elem) => {
             const data = allMovies[elem]
-            return (<Showcase allMovies={data} topMovies={topMovies} data={boeviks} title={elem} />)
+            return (<Showcase key={elem}  userId={props.match.params.id} allMovies={data} giveInfo={(movieId)=>{
+                let arr = sessionStorage.getItem('arr') || ''
+                arr.length==0 ? arr = arr + movieId.toString() : arr = arr +'_'+ movieId.toString()
+                sessionStorage.setItem('arr', arr)
+            }} 
+                data={boeviks} title={elem} />)
         })
         setshowcaseArr(tmp)
     }, [allMovies])
-
-
+    
     return (
         <Conteiner >
             <Header />
             {allMovies.length == 0 ?
                 <Spinner /> :
                 <React.Fragment>
-                    <StyledButtonSuc success>Access</StyledButtonSuc>
+                    <StyledButtonSuc success onClick={()=>{
+                        let arr = sessionStorage.getItem('arr') || []
+                        if(arr!=[]) setRecomendations(userChoise(arr,props.match.params.id))
+                        sessionStorage.removeItem('arr')
+                        }}>Access</StyledButtonSuc>
                     <StyledButtonWar warning onClick={() => { window.location.assign('http://localhost:3000/general'); }}>Skip questionnaire</StyledButtonWar>
                     <Form>
                         {showcaseArr}
