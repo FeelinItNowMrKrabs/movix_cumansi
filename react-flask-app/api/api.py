@@ -95,12 +95,24 @@ def get_boevik():
 
     return {'boeviks': boeviks}
 
-@app.route('/send_likes/<int:id>/<string:likes>')
-def add_message(id,likes):
-    my_id = id
-    list_likes = likes.split('_')
-    return {my_id:list_likes}
 
-@app.route('/check')
-def check():
-    return str(temp_huli)
+
+@app.route('/send_likes/<string:likes>')
+def add_message(likes):
+    list_like = likes
+    client = Client('127.0.0.1')
+    settt = []
+    hold_me = client.execute(f"""SELECT topK(25)(arrayJoin(sim)) from (select d, arrayFlatten(groupArray(sim)) as sim from (select splitByChar(',', similar_assetids) as sim, today() as d from similarfilms where assetid in ({list_like})) group by d)""")
+    
+    for i in hold_me[0][0]:
+        hold_bitch = client.execute(f"""select assetid, arrayElement(groupArray(title), 1) from events where assetid = {i} group by assetid""")
+        try:
+            tit_id = hold_bitch[0]
+        except IndexError:
+            continue
+        settt.append(tit_id)
+        if len(settt) == 25:
+            break
+    
+    return {'custoized' : settt}
+
