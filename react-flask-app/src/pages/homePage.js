@@ -52,7 +52,7 @@ const Spinner = () => {
 }
 
 async function userChoise(arr, userId){
-    const res = await fetch(`http://localhost:5000/send_likes/${userId.toString()}/${arr}`)
+    const res = await fetch(`http://localhost:5000/send_likes/${arr}`)
     const data = await res.json()
     console.log(data)
     return "da, vse ok"
@@ -77,7 +77,7 @@ export default function Main(props) {
             const data = allMovies[elem]
             return (<Showcase key={elem}  userId={props.match.params.id} allMovies={data} giveInfo={(movieId)=>{
                 let arr = sessionStorage.getItem('arr') || ''
-                arr.length==0 ? arr = arr + movieId.toString() : arr = arr +'_'+ movieId.toString()
+                arr.length==0 ? arr = arr + movieId.toString() : arr = arr +','+ movieId.toString()
                 sessionStorage.setItem('arr', arr)
             }} 
                 data={boeviks} title={elem} />)
